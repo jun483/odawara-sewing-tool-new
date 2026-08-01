@@ -21,40 +21,22 @@ class CalculatorEngine
                 return (new LessonBagCalculator())->calculate($data);
 
             case 'shoe_bag':
-                return [
-                    'success' => false,
-                    'message' => 'シューズバッグは現在開発中です。'
-                ];
+                return (new ShoeBagCalculator())->calculate($data);
 
             case 'drawstring':
-                return [
-                    'success' => false,
-                    'message' => '巾着袋は現在開発中です。'
-                ];
+                return (new DrawstringCalculator())->calculate($data);
 
             case 'tote':
-                return [
-                    'success' => false,
-                    'message' => 'トートバッグは現在開発中です。'
-                ];
+                return (new ToteBagCalculator())->calculate($data);
 
             case 'lunch_bag':
-                return [
-                    'success' => false,
-                    'message' => 'お弁当袋は現在開発中です。'
-                ];
+                return (new LunchBagCalculator())->calculate($data);
 
             case 'cup_bag':
-                return [
-                    'success' => false,
-                    'message' => 'コップ袋は現在開発中です。'
-                ];
+                return (new CupBagCalculator())->calculate($data);
 
             case 'knapsack':
-                return [
-                    'success' => false,
-                    'message' => 'ナップサックは現在開発中です。'
-                ];
+                return (new KnapsackCalculator())->calculate($data);
 
             default:
                 return [
