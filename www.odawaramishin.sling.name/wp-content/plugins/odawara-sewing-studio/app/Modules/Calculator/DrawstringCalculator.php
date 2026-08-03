@@ -57,6 +57,8 @@ class DrawstringCalculator
 
             'cut_height' => round($cutHeight, 1),
 
+            'quantity'     => $quantity,
+
             'handle' => 0,
 
             // 両ひも仕様

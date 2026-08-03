@@ -67,6 +67,8 @@ class LunchBagCalculator
 
             'cut_height' => round($cutHeight, 1),
 
+            'quantity'     => $quantity,
+
             // 両ひも
             'cord' => ($width * 2 + 20) * 2 * $quantity,
 

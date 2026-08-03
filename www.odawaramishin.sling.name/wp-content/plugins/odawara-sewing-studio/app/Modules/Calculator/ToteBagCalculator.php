@@ -64,6 +64,8 @@ class ToteBagCalculator
 
             'cut_height' => round($cutHeight, 1),
 
+            'quantity'     => $quantity,
+
             // 持ち手60cm×2本
             'handle' => 60 * 2 * $quantity,
 

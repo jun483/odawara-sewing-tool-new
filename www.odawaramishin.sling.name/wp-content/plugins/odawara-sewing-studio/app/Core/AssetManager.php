@@ -26,20 +26,28 @@ final class AssetManager
         );
 
         wp_enqueue_script(
-            'oss-script',
-            OSS_PLUGIN_URL . 'resources/js/app.js',
-            [],
-            OSS_VERSION,
-            true
-        );
+    'oss-script',
+    OSS_PLUGIN_URL . 'resources/js/app.js',
+    [],
+    OSS_VERSION,
+    true
+);
 
-        wp_localize_script(
-            'oss-script',
-            'oss',
-            [
-                'ajaxUrl' => admin_url('admin-ajax.php'),
-                'nonce'   => wp_create_nonce('oss_nonce'),
-            ]
-        );
+wp_localize_script(
+    'oss-script',
+    'oss',
+    [
+        'ajaxUrl' => admin_url('admin-ajax.php'),
+        'nonce'   => wp_create_nonce('oss_nonce'),
+    ]
+);
+
+wp_enqueue_script(
+    'oss-layout-renderer',
+    OSS_PLUGIN_URL . 'resources/js/layout-renderer.js',
+    ['oss-script'],
+    OSS_VERSION,
+    true
+);
     }
 }

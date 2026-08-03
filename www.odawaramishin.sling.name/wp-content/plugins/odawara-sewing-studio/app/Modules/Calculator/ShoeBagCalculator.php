@@ -67,6 +67,8 @@ class ShoeBagCalculator
 
             'cut_height' => round($cutHeight,1),
 
+            'quantity'     => $quantity,
+
             'handle' => 30 * $quantity,
 
             'interfacing' => round(

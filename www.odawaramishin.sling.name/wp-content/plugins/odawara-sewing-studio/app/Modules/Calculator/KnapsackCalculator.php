@@ -67,6 +67,8 @@ class KnapsackCalculator
 
             'cut_height' => round($cutHeight, 1),
 
+            'quantity'     => $quantity,
+
             // 両ひも
             'cord' => ($height + 60) * 2 * $quantity,
 
@@ -77,7 +79,6 @@ class KnapsackCalculator
             'pieces' => $pieces,
 
             'layout' => $layout
-
         ];
     }
 }

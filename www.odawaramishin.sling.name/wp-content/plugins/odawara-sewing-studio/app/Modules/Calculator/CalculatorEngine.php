@@ -18,25 +18,32 @@ class CalculatorEngine
         switch ($type) {
 
             case 'lesson_bag':
-                return (new LessonBagCalculator())->calculate($data);
+                $result = (new LessonBagCalculator())->calculate($data);
+                return ResultBuilder::build($result);
 
             case 'shoe_bag':
-                return (new ShoeBagCalculator())->calculate($data);
+                $result = (new ShoeBagCalculator())->calculate($data);
+                return ResultBuilder::build($result);
 
             case 'drawstring':
-                return (new DrawstringCalculator())->calculate($data);
+                $result = (new DrawstringCalculator())->calculate($data);
+                return ResultBuilder::build($result);
 
             case 'tote':
-                return (new ToteBagCalculator())->calculate($data);
+                $result = (new ToteBagCalculator())->calculate($data);
+                return ResultBuilder::build($result);
 
             case 'lunch_bag':
-                return (new LunchBagCalculator())->calculate($data);
+                $result = (new LunchBagCalculator())->calculate($data);
+                return ResultBuilder::build($result);
 
             case 'cup_bag':
-                return (new CupBagCalculator())->calculate($data);
+                $result = (new CupBagCalculator())->calculate($data);
+                return ResultBuilder::build($result);
 
             case 'knapsack':
-                return (new KnapsackCalculator())->calculate($data);
+                $result = (new KnapsackCalculator())->calculate($data);
+                return ResultBuilder::build($result);
 
             default:
                 return [

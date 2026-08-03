@@ -159,9 +159,9 @@ if (!defined('ABSPATH')) {
                 <option value="140">
                     140cm
                 </option>
-
             </select>
-                    <div class="oss-field">
+
+            <div class="oss-field">
 
             <button
                 type="button"
@@ -170,7 +170,7 @@ if (!defined('ABSPATH')) {
             >
                 🧮 生地を計算する
             </button>
-
+            </div>
         </div>
 
         <div class="oss-loading" id="oss-loading" style="display:none;">
@@ -256,5 +256,3 @@ if (!defined('ABSPATH')) {
     </p>
 
 </div>
-
-        </div>

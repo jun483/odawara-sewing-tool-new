@@ -64,6 +64,8 @@ class LessonBagCalculator
 
             'cut_height' => round($cutHeight, 1),
 
+            'quantity'     => $quantity,
+
             'handle' => 35 * 2 * $quantity,
 
             'interfacing' => round(
