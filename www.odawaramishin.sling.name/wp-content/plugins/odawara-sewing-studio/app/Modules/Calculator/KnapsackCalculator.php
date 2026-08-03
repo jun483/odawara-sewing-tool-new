@@ -55,6 +55,8 @@ class KnapsackCalculator
 
             'success' => true,
 
+            'type' => 'knapsack',
+
             'title' => 'ナップサック',
 
             'fabric' => $fabric,
@@ -73,6 +75,9 @@ class KnapsackCalculator
             'cord' => ($height + 60) * 2 * $quantity,
 
             'handle' => 0,
+
+            'd_ring' => 2 * $quantity,
+
 
             'interfacing' => 0,
 

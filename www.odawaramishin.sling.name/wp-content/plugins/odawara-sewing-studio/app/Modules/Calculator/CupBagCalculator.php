@@ -55,6 +55,8 @@ class CupBagCalculator
 
             'success' => true,
 
+            'type' => 'cup_bag',
+
             'title' => 'コップ袋',
 
             'fabric' => $fabric,

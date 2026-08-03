@@ -52,6 +52,8 @@ class ToteBagCalculator
 
             'success' => true,
 
+            'type' => 'tote',
+
             'title' => 'トートバッグ',
 
             'fabric' => $fabric,

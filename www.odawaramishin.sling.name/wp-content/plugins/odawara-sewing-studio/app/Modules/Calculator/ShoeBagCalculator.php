@@ -49,11 +49,19 @@ class ShoeBagCalculator
             $pieces,
             $fabricWidth
         );
+        $layout = $calculator->layout(
+            $cutWidth,
+            $cutHeight,
+            $pieces,
+            $fabricWidth
+        );
 
 
         return [
 
             'success' => true,
+
+            'type' => 'shoe_bag',
 
             'title' => 'シューズバッグ',
 
@@ -69,13 +77,15 @@ class ShoeBagCalculator
 
             'quantity'     => $quantity,
 
-            'handle' => 30 * $quantity,
+            'handle' => 70 * $quantity,
+
+            'd_ring' => 2 * $quantity,
 
             'interfacing' => round(
                 ($cutWidth * $cutHeight * $pieces) / 10000,
                 2
-            )
-
+            ),
+            'layout' => $layout
         ];
 
     }

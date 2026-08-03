@@ -55,6 +55,8 @@ class LunchBagCalculator
 
             'success' => true,
 
+            'type' => 'lunch_bag',
+
             'title' => 'お弁当袋',
 
             'fabric' => $fabric,

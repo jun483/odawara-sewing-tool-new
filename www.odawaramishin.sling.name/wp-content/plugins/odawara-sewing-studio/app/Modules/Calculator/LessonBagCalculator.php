@@ -52,6 +52,8 @@ class LessonBagCalculator
 
             'success' => true,
 
+            'type'    => 'lesson_bag',
+
             'title' => 'レッスンバッグ',
 
             'fabric' => $fabric,

@@ -45,6 +45,8 @@ class DrawstringCalculator
 
             'success' => true,
 
+            'type' => 'drawstring',
+
             'title' => '巾着袋',
 
             'fabric' => $fabric,

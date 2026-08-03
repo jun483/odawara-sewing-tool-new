@@ -27,9 +27,7 @@ class ResultBuilder
         $result['rotate'] = $layout['rotate'];
         $result['layout_length'] = $layout['length'];
 
-        $result = MaterialCalculator::calculate($result);
-
-return $result;
+        return $result;
     }
 
     private static function calculateLayout(
