@@ -115,6 +115,16 @@ document.addEventListener("DOMContentLoaded", () => {
                         <th>裁断サイズ</th>
                         <td>${data.cut_width} × ${data.cut_height} cm</td>
                     </tr>
+                    <tr>
+
+                    <th>おすすめ購入量（表地）</th>
+                    <td>${data.purchase_fabric} m</td>
+                    </tr>
+
+                    <tr>
+                    <th>おすすめ購入量（裏地）</th>
+                    <td>${data.purchase_lining} m</td>
+                    </tr>
         `;
 
     if (data.handle && Number(data.handle) > 0) {
