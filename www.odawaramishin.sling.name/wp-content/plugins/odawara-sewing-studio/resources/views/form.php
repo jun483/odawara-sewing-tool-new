@@ -83,6 +83,34 @@
 
     <div class="oss-field">
 
+        <label for="oss-fabric-type">生地の種類</label>
+
+        <select id="oss-fabric-type">
+
+            <option value="oxford">オックス</option>
+
+            <option value="canvas">帆布</option>
+
+            <option value="broad">ブロード</option>
+
+            <option value="sheeting">シーチング</option>
+
+            <option value="twill">ツイル</option>
+
+            <option value="linen">リネン</option>
+
+            <option value="quilting">キルティング</option>
+
+            <option value="laminate">ラミネート</option>
+
+            <option value="denim">デニム</option>
+
+            <option value="double_gauze">ダブルガーゼ</option>
+
+            <option value="fleece">フリース</option>
+
+        </select>
+
         <label for="oss-fabric-width">生地幅</label>
 
         <select id="oss-fabric-width">

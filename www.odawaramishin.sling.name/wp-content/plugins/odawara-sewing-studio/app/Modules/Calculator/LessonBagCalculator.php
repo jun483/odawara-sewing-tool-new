@@ -14,6 +14,7 @@ class LessonBagCalculator
         $height       = (float)($data['height'] ?? 0);
         $quantity     = max(1, (int)($data['quantity'] ?? 1));
         $fabricWidth  = (int)($data['fabric_width'] ?? 110);
+        $fabricType = $data['fabric_type'] ?? 'oxford';
 
         if ($width <= 0 || $height <= 0) {
             return [

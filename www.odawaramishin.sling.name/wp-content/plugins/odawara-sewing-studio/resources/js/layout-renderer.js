@@ -144,6 +144,8 @@ window.OSSLayoutRenderer = {
 
         ctx.restore();
 
+        ctx.textAlign = "left";
+
         count++;
       }
     }
@@ -163,5 +165,14 @@ window.OSSLayoutRenderer = {
       margin,
       margin + fabricHeight + 35,
     );
+    const saveBtn = document.getElementById("oss-save");
+
+    if (saveBtn) {
+      saveBtn.addEventListener("click", () => {
+        localStorage.setItem("oss_last_result", JSON.stringify(data));
+
+        alert("計算結果を保存しました。");
+      });
+    }
   },
 };

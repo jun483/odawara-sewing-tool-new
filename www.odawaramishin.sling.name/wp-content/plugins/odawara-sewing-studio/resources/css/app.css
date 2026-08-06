@@ -68,7 +68,7 @@
   font-weight: bold;
 }
 /* ===========================
-   ボタン
+  ボタン
 =========================== */
 
 .oss-button {
@@ -94,7 +94,7 @@
 }
 
 /* ===========================
-   ローディング
+  ローディング
 =========================== */
 
 .oss-loading {
@@ -106,7 +106,7 @@
 }
 
 /* ===========================
-   結果カード
+  結果カード
 =========================== */
 
 .oss-result {
@@ -310,4 +310,310 @@
 }
 .oss-field select {
   height: 48px !important;
+}
+/* ===========================
+   印刷専用
+=========================== */
+
+@media print {
+  body {
+    background: #fff;
+  }
+
+  .oss-button,
+  .oss-actions,
+  .oss-shop-links,
+  .oss-help,
+  .oss-notice {
+    display: none !important;
+  }
+
+  .oss-card {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+
+  .oss-result-card {
+    border: 1px solid #000;
+  }
+
+  #oss-layout {
+    display: block !important;
+  }
+
+  #oss-layout-canvas {
+    max-width: 100%;
+    border: 1px solid #000;
+  }
+
+  .oss-title {
+    font-size: 24px;
+  }
+}
+.oss-shop-links {
+  margin-top: 30px;
+}
+
+.oss-buy-button {
+  display: block;
+  margin: 10px 0;
+  padding: 14px;
+  background: #0066cc;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.oss-buy-button:hover {
+  background: #004d99;
+}
+.oss-actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.oss-actions .oss-button {
+  flex: 1;
+}
+/* ===========================
+   購入ボタン
+=========================== */
+
+.oss-buy-card {
+  margin-top: 30px;
+  padding: 25px;
+
+  background: #f8fafc;
+
+  border: 1px solid #dbe5ef;
+
+  border-radius: 12px;
+
+  text-align: center;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.oss-buy-card h3 {
+  margin-bottom: 15px;
+
+  color: #1f2937;
+
+  font-size: 20px;
+}
+
+.oss-buy-card p {
+  margin-bottom: 20px;
+
+  color: #555;
+
+  line-height: 1.6;
+}
+
+.oss-buy-button {
+  display: inline-block;
+
+  padding: 14px 32px;
+
+  background: #2563eb;
+
+  color: #fff;
+
+  text-decoration: none;
+
+  font-size: 16px;
+
+  font-weight: bold;
+
+  border-radius: 8px;
+
+  transition: 0.25s;
+}
+
+.oss-buy-button:hover {
+  background: #1d4ed8;
+
+  transform: translateY(-2px);
+}
+/* ===========================
+   計算日時
+=========================== */
+
+.oss-date{
+
+    color:#666;
+
+    margin-top:8px;
+
+    margin-bottom:20px;
+
+    font-size:14px;
+
+}
+
+
+/* ===========================
+   印刷ボタン
+=========================== */
+
+.oss-print{
+
+    text-align:center;
+
+    margin-top:30px;
+
+}
+
+.oss-print-btn{
+
+    background:#2563eb;
+
+    color:#fff;
+
+    border:none;
+
+    padding:14px 28px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+}
+
+.oss-print-btn:hover{
+
+    background:#1d4ed8;
+
+}
+@media print{
+
+    #oss-form{
+
+        display:none;
+
+    }
+
+    #oss-calc{
+
+        display:none;
+
+    }
+
+    .oss-print{
+
+        display:none;
+
+    }
+
+}
+.oss-date {
+    margin: 8px 0 20px;
+    color: #666;
+    font-size: 14px;
+}
+/* ===========================
+   購入ボタン
+=========================== */
+
+.oss-buy-card {
+
+    margin-top: 30px;
+    padding: 25px;
+
+    background: #f8fafc;
+
+    border: 1px solid #dbe5ef;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,.08);
+
+}
+
+.oss-buy-card h3 {
+
+    margin-bottom: 15px;
+
+    color: #1f2937;
+
+    font-size: 20px;
+
+}
+
+.oss-buy-card p {
+
+    margin-bottom: 20px;
+
+    color: #555;
+
+    line-height: 1.6;
+
+}
+
+.oss-buy-button {
+
+    display: inline-block;
+
+    padding: 14px 32px;
+
+    background: #2563eb;
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    border-radius: 8px;
+
+    transition: .25s;
+
+}
+
+.oss-buy-button:hover {
+
+    background: #1d4ed8;
+
+    transform: translateY(-2px);
+
+}
+.oss-pdf-btn{
+
+    margin-left:15px;
+
+    background:#16a34a;
+
+    color:#fff;
+
+    border:none;
+
+    padding:14px 28px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+}
+
+.oss-pdf-btn:hover{
+
+    background:#15803d;
+
 }

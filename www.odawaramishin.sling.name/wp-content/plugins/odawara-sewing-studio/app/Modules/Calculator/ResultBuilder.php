@@ -26,6 +26,13 @@ class ResultBuilder
         $result['rows'] = $layout['rows'];
         $result['rotate'] = $layout['rotate'];
         $result['layout_length'] = $layout['length'];
+        $result['links'] = [
+            'fabric' => '/fabric/',
+            'lining' => '/lining/',
+            'handle' => '/handle/',
+            'cord' => '/cord/',
+            'd_ring' => '/d-ring/'
+];
 
         return $result;
     }

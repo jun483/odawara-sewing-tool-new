@@ -31,6 +31,11 @@ final class Ajax
             'height'       => (float) ($_POST['height'] ?? 0),
             'quantity'     => max(1, (int) ($_POST['quantity'] ?? 1)),
             'fabric_width' => (int) ($_POST['fabric_width'] ?? 110),
+
+            // ここを追加
+            'fabric_type'  => sanitize_text_field(
+                $_POST['fabric_type'] ?? 'oxford'
+            ),
         ]);
 
         wp_send_json($result);
