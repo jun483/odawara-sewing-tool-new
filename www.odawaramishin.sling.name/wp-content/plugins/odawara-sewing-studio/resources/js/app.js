@@ -210,15 +210,51 @@ document.addEventListener("DOMContentLoaded", () => {
         </table>
       </div>`;
 
-    if (data.shop_url) {
+    //==============================
+    // 材料購入一覧
+    //==============================
+
+    if (data.materials) {
       html += `
-        <div class="oss-buy-card">
-          <h3>おすすめ材料はこちら</h3>
-          <p>この作品に必要な材料を購入できます。</p>
-          <a href="${escapeHTML(data.shop_url)}" class="oss-buy-button" target="_blank" rel="noopener noreferrer">
-            材料を購入する
-          </a>
-        </div>`;
+    <div class="oss-material-card">
+
+        <h3>🛒 必要な材料を購入</h3>
+    `;
+
+      Object.values(data.materials).forEach((material) => {
+        if (Number(material.quantity) <= 0) {
+          return;
+        }
+
+        html += `
+
+        <div class="oss-material-item">
+
+            <div>
+
+                <strong>${material.name}</strong><br>
+
+                必要量：
+                ${material.quantity}${material.unit}
+
+            </div>
+
+            <a
+                href="${material.url}"
+                class="oss-buy-button"
+                target="_blank"
+            >
+                購入する
+            </a>
+
+        </div>
+
+        `;
+      });
+
+      html += `
+    </div>
+    `;
     }
 
     html += `
@@ -228,15 +264,12 @@ document.addEventListener("DOMContentLoaded", () => {
         </button>
       </div>
       <div class="oss-print">
-        <button class="oss-print-btn" id="oss-print-trigger">
-          🖨 計算結果を印刷
-        </button>
         <button class="oss-button" onclick="window.print()">
-        🖨 印刷
+          🖨 印刷
         </button>
 
         <button class="oss-button" id="oss-pdf">
-        📄 PDF保存
+          📄 PDF保存
         </button>
       </div>`;
 
@@ -245,28 +278,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (pdfButton) {
       pdfButton.addEventListener("click", () => {
+        // html2pdf が定義されているか判定
+        if (typeof html2pdf === "undefined") {
+          alert(
+            "PDF作成機能の準備ができていません。ライブラリの読み込みを確認してください。",
+          );
+          return;
+        }
+
         const element = document.querySelector(".oss-result-card");
 
         html2pdf()
           .set({
             margin: 10,
-
             filename: `${data.title}.pdf`,
-
-            image: {
-              type: "jpeg",
-              quality: 1,
-            },
-
-            html2canvas: {
-              scale: 2,
-            },
-
-            jsPDF: {
-              unit: "mm",
-              format: "a4",
-              orientation: "portrait",
-            },
+            image: { type: "jpeg", quality: 1 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
           })
           .from(element)
           .save();
@@ -277,12 +305,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("oss-save")?.addEventListener("click", () => {
       saveBookmark(data, dateText);
     });
-
-    document
-      .getElementById("oss-print-trigger")
-      ?.addEventListener("click", () => {
-        window.print();
-      });
 
     // 裁断図描画
     if (window.OSSLayoutRenderer) {
