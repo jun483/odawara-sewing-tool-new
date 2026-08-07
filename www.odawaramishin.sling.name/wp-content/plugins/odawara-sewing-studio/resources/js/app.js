@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         child_apron: "おすすめ：60 × 70cm",
 
-        bandana: "おすすめ：55 × 55cm"
+        bandana: "おすすめ：55 × 55cm",
 
         apron: "おすすめ：70 × 80cm",
 

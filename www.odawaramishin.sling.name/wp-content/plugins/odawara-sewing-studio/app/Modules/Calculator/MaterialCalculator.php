@@ -18,13 +18,13 @@ class MaterialCalculator
                 $result['handle'] = 70 * ($result['quantity'] ?? 1);
                 $result['cord'] = 0;
                 $result['d_ring'] = 0;
-            break;
+                break;
 
             case 'shoe_bag':
                 $result['handle'] = 70 * ($result['quantity'] ?? 1);
                 $result['cord'] = 0;
                 $result['d_ring'] = 2 *    ($result['quantity'] ?? 1);
-            break;
+                break;
 
             case 'drawstring':
                 $result['handle'] = 0;
