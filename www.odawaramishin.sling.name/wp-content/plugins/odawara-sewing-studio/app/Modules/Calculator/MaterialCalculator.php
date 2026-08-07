@@ -18,37 +18,63 @@ class MaterialCalculator
                 $result['handle'] = 70 * ($result['quantity'] ?? 1);
                 $result['cord'] = 0;
                 $result['d_ring'] = 0;
-                break;
+            break;
 
             case 'shoe_bag':
                 $result['handle'] = 70 * ($result['quantity'] ?? 1);
                 $result['cord'] = 0;
                 $result['d_ring'] = 2 *    ($result['quantity'] ?? 1);
-                break;
+            break;
 
             case 'drawstring':
                 $result['handle'] = 0;
                 $result['cord'] = 160;
                 $result['d_ring'] = 0;
-                break;
+            break;
 
             case 'lunch_bag':
                 $result['handle'] = 0;
                 $result['cord'] = 120;
                 $result['d_ring'] = 0;
-                break;
+            break;
 
             case 'cup_bag':
                 $result['handle'] = 0;
                 $result['cord'] = 100;
                 $result['d_ring'] = 0;
-                break;
+            break;
 
             case 'knapsack':
                 $result['handle'] = 0;
                 $result['cord'] = 300;
                 $result['d_ring'] = 2;
-                break;
+            break;
+
+            case 'apron':
+
+                $result['handle']=0;
+                $result['cord']=0;
+                $result['d_ring']=0;
+
+            break;
+
+
+case 'child_apron':
+
+    $result['handle']=0;
+    $result['cord']=0;
+    $result['d_ring']=0;
+
+break;
+
+
+case 'bandana':
+
+    $result['handle']=0;
+    $result['cord']=0;
+    $result['d_ring']=0;
+
+break;
 
             default:
                 $result['handle'] = 0;

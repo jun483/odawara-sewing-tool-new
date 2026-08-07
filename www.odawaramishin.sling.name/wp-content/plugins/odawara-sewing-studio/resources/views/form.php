@@ -15,6 +15,9 @@
             <option value="lunch_bag">お弁当袋</option>
             <option value="cup_bag">コップ袋</option>
             <option value="knapsack">ナップサック</option>
+            <option value="apron">エプロン</option>
+            <option value="child_apron">子供用エプロン</option>
+            <option value="bandana">三角巾</option>
 
         </select>
 

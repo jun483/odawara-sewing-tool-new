@@ -45,6 +45,66 @@ class CalculatorEngine
                 $result = (new KnapsackCalculator())->calculate($data);
                 return ResultBuilder::build($result);
 
+            case 'apron':
+
+                $result = [
+                'success'=>true,
+                'type'=>'apron',
+                'title'=>'エプロン',
+
+                'fabric_width'=>$fabricWidth,
+
+                'cut_width'=>75,
+                'cut_height'=>90,
+
+                'fabric'=>2.0,
+                'lining'=>0,
+
+                'handle'=>0,
+                'cord'=>0,
+
+            ];
+
+    break;
+
+            case 'child_apron':
+
+            $result = [
+            'success'=>true,
+            'type'=>'child_apron',
+            'title'=>'子供用エプロン',
+
+            'fabric_width'=>$fabricWidth,
+
+            'cut_width'=>65,
+            'cut_height'=>75,
+
+            'fabric'=>1.5,
+            'lining'=>0,
+
+            ];
+
+    break;
+
+        case 'bandana':
+
+            $result = [
+            'success'=>true,
+            'type'=>'bandana',
+            'title'=>'三角巾',
+
+            'fabric_width'=>$fabricWidth,
+
+            'cut_width'=>60,
+            'cut_height'=>60,
+
+            'fabric'=>0.6,
+            'lining'=>0,
+
+            ];
+
+    break;
+
             default:
                 return [
                     'success' => false,
