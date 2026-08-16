@@ -11,71 +11,81 @@
 
   console.log("[OSS] layout-renderer.js loaded");
 
-  /* =========================================================
-   * 1. ミシンレジストリ
-   * ========================================================= */
+  /*
+   * ========================================
+   * OSS Machine Registry
+   * ========================================
+   */
 
-  window.OSSMachineRegistry = window.OSSMachineRegistry || {
-    machines: {},
+  window.OSSMachineRegistry = window.OSSMachineRegistry || {};
 
-    register: function (id, config) {
+  window.OSSMachineRegistry.machines = window.OSSMachineRegistry.machines || {};
+
+  /*
+   * メーカー登録
+   */
+  window.OSSMachineRegistry.register =
+    window.OSSMachineRegistry.register ||
+    function (id, config) {
       if (!id || !config) {
+        console.warn("[OSS] Invalid machine registration:", id);
         return;
       }
 
       this.machines[id] = config;
 
-      console.log("[OSS] machine registered:", id);
-    },
+      console.log("[OSS] Machine registered:", id, config);
+    };
 
-    getRecommendations: function (projectKey, fabricName) {
+  /*
+   * おすすめミシン取得
+   */
+  window.OSSMachineRegistry.getRecommendations =
+    window.OSSMachineRegistry.getRecommendations ||
+    function (projectKey, fabricName) {
       const results = [];
 
-      const machines = this.machines || {};
+      console.log("[OSS] getRecommendations:", projectKey, fabricName);
 
-      Object.keys(machines).forEach(function (id) {
-        const machine = machines[id];
+      for (const id in this.machines) {
+        const machine = this.machines[id];
 
         if (!machine) {
-          return;
+          continue;
         }
 
-        /*
-         * enabled が false の場合だけ除外
-         *
-         * 以前のコードでは
-         * enabled === true
-         * でないと全部除外されていました。
-         *
-         * 今回は未指定なら有効として扱います。
-         */
-        if (machine.enabled === false) {
-          return;
+        if (machine.enabled !== true) {
+          console.log("[OSS] machine disabled:", id);
+          continue;
         }
 
         if (typeof machine.getDetails !== "function") {
-          return;
+          console.warn("[OSS] getDetails missing:", id);
+          continue;
         }
 
         try {
-          const result = machine.getDetails(projectKey || "", fabricName || "");
+          const detail = machine.getDetails(projectKey, fabricName);
 
-          if (result) {
-            results.push(result);
+          if (detail) {
+            results.push(detail);
           }
-        } catch (e) {
-          console.error("[OSS] machine recommendation error:", id, e);
+        } catch (error) {
+          console.error("[OSS] Machine recommendation error:", id, error);
         }
-      });
+      }
+
+      console.log("[OSS] recommendations:", results);
 
       return results;
-    },
-  };
+    };
 
-  /* =========================================================
-   * 2. ジャノメ
-   * ========================================================= */
-
+  /*
+   * デフォルト登録：ジャノメ
+   *
+   * janome.js が後から読み込まれた場合は
+   * janome.js 側の設定に置き換えられる
+   */
   if (!window.OSSMachineRegistry.machines.janome) {
     window.OSSMachineRegistry.register("janome", {
       enabled: true,
@@ -83,107 +93,28 @@
       name: "ジャノメ",
 
       getDetails: function (projectKey, fabricName) {
-        projectKey = projectKey || "";
         fabricName = fabricName || "";
-
-        const heavyProjects = ["lesson_bag", "shoe_bag", "tote", "knapsack"];
-
-        const isHeavy =
-          heavyProjects.includes(projectKey) ||
-          fabricName.includes("canvas") ||
-          fabricName.includes("帆布") ||
-          fabricName.includes("quilting") ||
-          fabricName.includes("キルト") ||
-          fabricName.includes("厚地");
-
-        const isThin =
-          fabricName.includes("thin") ||
-          fabricName.includes("lawn") ||
-          fabricName.includes("薄地") ||
-          fabricName.includes("ローン");
-
-        /* 厚地 */
-
-        if (isHeavy) {
-          return {
-            id: "janome",
-
-            badge: "ジャノメ（厚物・強力パワー）",
-
-            color: "#2563eb",
-
-            models: "NP860 / MP470M",
-
-            description:
-              "アクリルテープの重ね縫いや厚手生地も、力強い布送りでスムーズに縫えます。",
-
-            needle: "HA×1 #14（厚地用）",
-
-            thread: "シャッペスパン #60 または #30",
-
-            presser: "基本押え（段差固定ボタン使用）",
-
-            advice:
-              "重なり部分は針を#14にし、手回しでゆっくり進めるとキレイに仕上がります。",
-          };
-        }
-
-        /* 薄地 */
-
-        if (isThin) {
-          return {
-            id: "janome",
-
-            badge: "ジャノメ（薄地・パッカリング防止）",
-
-            color: "#2563eb",
-
-            models: "NP860 / MP470M",
-
-            description:
-              "ローンや薄地でも縫い縮みを抑えてキレイな縫い目に仕上げます。",
-
-            needle: "HA×1 #9（薄地用）",
-
-            thread: "シャッペスパン #90",
-
-            presser: "基本押え / 直線専用押え",
-
-            advice: "縫い始めに薄紙を一緒に挟むと巻き込みを防げます。",
-          };
-        }
-
-        /* 標準 */
 
         return {
           id: "janome",
-
           badge: "ジャノメ（標準・万能）",
-
           color: "#2563eb",
-
           models: "NP860 / MP470M",
-
           description:
-            "入園入学グッズから小物づくりまで幅広く対応する使いやすいミシンです。",
-
+            "入園入学グッズから小物づくりまで幅広く対応できるおすすめミシンです。",
           needle: "HA×1 #11（普通地用）",
-
           thread: "シャッペスパン #60",
-
           presser: "基本押え（A押え）",
-
           advice:
-            "布端はジグザグ縫いや裁ち目かがりで処理するとキレイに仕上がります。",
+            "布端はジグザグ縫いまたは裁ち目かがりで処理するときれいに仕上がります。",
         };
       },
     });
   }
 
-  /* =========================================================
-   * 3. ベビーロック
-   * ========================================================= */
-
+  /*
+   * デフォルト登録：ベビーロック
+   */
   if (!window.OSSMachineRegistry.machines.babylock) {
     window.OSSMachineRegistry.register("babylock", {
       enabled: true,
@@ -193,33 +124,17 @@
       getDetails: function (projectKey, fabricName) {
         fabricName = fabricName || "";
 
-        const isKnit =
-          fabricName.includes("knit") ||
-          fabricName.includes("ニット") ||
-          fabricName.includes("スウェット");
-
         return {
           id: "babylock",
-
-          badge: "ベビーロック（端処理・ロックミシン）",
-
+          badge: "ベビーロック（端処理）",
           color: "#d97706",
-
           models: "糸取物語 / 衣縫人シリーズ",
-
-          description: isKnit
-            ? "ニット生地の縫い合わせと端処理を同時に行え、既製品のような仕上がりを目指せます。"
-            : "生地の端を切りながらキレイにかがり縫い。完成度を高めたい作品におすすめです。",
-
-          needle: isKnit ? "HA×1ST #11〜#14" : "HA×1SP #11",
-
-          thread: isKnit ? "バルキー糸 / レジロン糸" : "ロックミシン用糸 #90",
-
+          description:
+            "生地端をきれいに処理し、既製品のような仕上がりを目指せます。",
+          needle: "HA×1SP #11",
+          thread: "ロックミシン用糸 #90",
           presser: "標準ロック押え",
-
-          advice: isKnit
-            ? "ニット生地はロックミシンで端処理と縫い合わせを同時に行えます。"
-            : "ほつれやすい生地や作品の完成度を上げたい場合におすすめです。",
+          advice: "ほつれやすい生地の端処理におすすめです。",
         };
       },
     });
