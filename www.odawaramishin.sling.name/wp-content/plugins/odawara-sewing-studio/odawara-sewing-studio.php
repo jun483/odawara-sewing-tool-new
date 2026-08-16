@@ -77,5 +77,34 @@ add_action('wp_enqueue_scripts', function () {
         $version,
         true
     );
+// functions.php 内の読み込み処理例
+function oss_enqueue_scripts() {
+    // 1. 基盤となる layout-renderer.js を先に読み込む
+    wp_enqueue_script(
+        'oss-layout-renderer',
+        get_template_directory_uri() . '/resources/js/layout-renderer.js',
+        array('jquery'),
+        '1.0.0',
+        true
+    );
 
+    // 2. janome.js は oss-layout-renderer に依存させる
+    wp_enqueue_script(
+        'oss-janome',
+        get_template_directory_uri() . '/resources/js/janome.js',
+        array('oss-layout-renderer'),
+        '1.0.0',
+        true
+    );
+
+    // 3. babylock.js も oss-layout-renderer に依存させる
+    wp_enqueue_script(
+        'oss-babylock',
+        get_template_directory_uri() . '/resources/js/babylock.js',
+        array('oss-layout-renderer'),
+        '1.0.0',
+        true
+    );
+}
+add_action('wp_enqueue_scripts', 'oss_enqueue_scripts');
 });
