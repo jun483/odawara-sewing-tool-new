@@ -1,23 +1,30 @@
-window.OSSMachineRegistry.register("juki", {
-  enabled: false, // ★ true から false に変更（契約完了時に true へ戻します）
-  name: "JUKI",
+/**
+ * JUKI Recommendation Config
+ * File: resources/js/machines/juki.js
+ */
+(function () {
+  "use strict";
+  if (!window.OSSMachineRegistry) return;
 
-  getRecommendation: function (projectKey, fabricName) {
-    if (
-      projectKey === "lesson_bag" ||
-      projectKey === "tote" ||
-      fabricName === "帆布" ||
-      fabricName === "デニム"
-    ) {
+  window.OSSMachineRegistry.register("juki", {
+    enabled: false, // 取り扱い開始時に true に変更
+    name: "JUKI",
+
+    getDetails: function (projectKey, fabricName) {
       return {
-        mfgName: "JUKI",
-        type: "職業用ミシン",
-        title: "【JUKI】圧倒的な馬力と美しい直線縫い",
-        model: "TL-30 / HY-SPEC",
+        id: "juki",
+        badge: "JUKI（職業用・直線特化モデル）",
+        color: "#10b981",
+        tagline: "圧倒的な貫通力と美しく力強い直線縫い",
+        models: "JUKI TL-30 / SL-700EX",
         description:
-          "工業用ミシンの技術を継承したパワフルな貫通力。段差のある持ち手縫いも失速しません。",
+          "厚手生地や革・帆布の重ね縫いも軽々こなす、プロ・ハイアマチュア向けモデルです。",
+        needle: "工業用針 DB×1 #11〜#16",
+        thread: "スパン糸 #60 / #30",
+        presser: "標準押え / スムース押え",
+        advice:
+          "高速縫製が可能なため、角部やカーブ手前ではフットコントローラーを緩めて調整してください。",
       };
-    }
-    return null;
-  },
-});
+    },
+  });
+})();
