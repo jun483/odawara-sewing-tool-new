@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class CupBagCalculator
+class ChildApronCalculator
 {
     public function calculate(array $data): array
     {
@@ -22,18 +22,12 @@ class CupBagCalculator
             ];
         }
 
-        // 縫い代（左右各2cm）
         $seam = 2;
 
-        // マチ
-        $gusset = 8;
+        $cutWidth  = $width + ($seam * 2);
+        $cutHeight = $height + ($seam * 2);
 
-        // 【修正】パーツ1枚あたりの裁断サイズ（横幅の2倍計算を修正）
-        $cutWidth  = $width + $gusset + ($seam * 2);
-        $cutHeight = $height + ($gusset / 2) + 10 + ($seam * 2);
-
-        // 本体2枚（前・後）
-        $pieces = $quantity * 2;
+        $pieces = $quantity;
 
         $calculator = new FabricCalculator();
 
@@ -54,26 +48,25 @@ class CupBagCalculator
 
         return [
             'success'      => true,
-            'type'         => 'cup_bag',
-            'title'        => 'コップ袋',
+            'type'         => 'child_apron',
+            'title'        => '子供用エプロン',
             'fabric'       => $fabric,
             'lining'       => 0,
             'fabric_width' => $fabricWidth,
             'cut_width'    => round($cutWidth, 1),
             'cut_height'   => round($cutHeight, 1),
 
-            // 描画・レイアウト必須項目
-            'quantity'     => $pieces,                   // 描画用（パーツ合計枚数）
-            'bag_quantity' => $quantity,                 // 作品の個数
+            'quantity'     => $pieces,
+            'bag_quantity' => $quantity,
             'pieces'       => $pieces,
-            'columns'      => $layout['columns'] ?? 1,   // 列数
-            'rows'         => $layout['rows'] ?? 1,      // 行数
-            'rotate'       => $layout['rotate'] ?? false,// 回転フラグ
+
+            'columns'      => $layout['columns'] ?? 1,
+            'rows'         => $layout['rows'] ?? 1,
+            'rotate'       => $layout['rotate'] ?? false,
             'layout'       => $layout,
 
-            // 付属材料
-            'cord'         => ($width * 2 + 20) * 2 * $quantity, // 両ひも
             'handle'       => 0,
+            'cord'         => 0,
             'interfacing'  => 0,
         ];
     }

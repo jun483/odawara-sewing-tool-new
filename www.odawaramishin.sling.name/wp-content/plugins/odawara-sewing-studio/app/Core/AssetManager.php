@@ -10,7 +10,7 @@ final class AssetManager
 {
     public function __construct()
     {
-        add_action('wp_enqueue_scripts', [$this, 'enqueueFrontend']);
+        \add_action('wp_enqueue_scripts', [$this, 'enqueueFrontend']);
     }
 
     /**
@@ -18,14 +18,14 @@ final class AssetManager
      */
     public function enqueueFrontend(): void
     {
-        wp_enqueue_style(
+        \wp_enqueue_style(
             'oss-style',
             OSS_PLUGIN_URL . 'resources/css/app.css',
             [],
             OSS_VERSION
         );
 
-        wp_enqueue_script(
+        \wp_enqueue_script(
     'oss-script',
     OSS_PLUGIN_URL . 'resources/js/app.js',
     [],
@@ -33,16 +33,16 @@ final class AssetManager
     true
 );
 
-wp_localize_script(
+\wp_localize_script(
     'oss-script',
     'oss',
     [
-        'ajaxUrl' => admin_url('admin-ajax.php'),
-        'nonce'   => wp_create_nonce('oss_nonce'),
+        'ajaxUrl' => \admin_url('admin-ajax.php'),
+        'nonce'   => \wp_create_nonce('oss_nonce'),
     ]
 );
 
-wp_enqueue_script(
+\wp_enqueue_script(
     'oss-layout-renderer',
     OSS_PLUGIN_URL . 'resources/js/layout-renderer.js',
     ['oss-script'],

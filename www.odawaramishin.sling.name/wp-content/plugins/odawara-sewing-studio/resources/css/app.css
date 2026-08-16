@@ -627,3 +627,200 @@
 
   text-decoration: none;
 }
+/* ==========================
+   必要材料・購入
+========================== */
+
+.oss-materials {
+  margin-top: 25px;
+  padding: 20px;
+  background: #f8f9fb;
+  border-radius: 12px;
+  border: 1px solid #e2e5e9;
+}
+
+.oss-materials h3 {
+  margin: 0 0 18px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.oss-material-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.oss-material-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 15px;
+  background: #ffffff;
+  border: 1px solid #e1e1e1;
+  border-radius: 10px;
+}
+
+.oss-material-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.oss-material-info strong {
+  font-size: 16px;
+}
+
+.oss-material-info span {
+  font-size: 14px;
+  color: #666;
+}
+
+.oss-buy-button {
+  display: inline-block;
+  padding: 10px 18px;
+  background: #1e73be;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+
+.oss-buy-button:hover {
+  opacity: 0.85;
+}
+
+/* スマホ */
+@media (max-width: 600px) {
+  .oss-material-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .oss-buy-button {
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+/* ミシン販売プロモーションカード */
+.oss-promo-card {
+  margin: 25px 0;
+  padding: 20px;
+  background: #f4f8fa;
+  border: 2px solid #2b7a78;
+  border-radius: 8px;
+}
+
+.oss-promo-header h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.15rem;
+  color: #17252a;
+}
+
+.oss-promo-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.oss-promo-list {
+  margin: 15px 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.oss-promo-list li {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.oss-promo-action {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.oss-promo-btn {
+  display: inline-block;
+  background-color: #2b7a78;
+  color: #ffffff !important;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.oss-promo-btn:hover {
+  background-color: #3aafa9;
+}
+
+/* PDF・印刷用 特典チケット */
+.oss-coupon-box {
+  margin: 20px 0;
+  padding: 15px;
+  border: 2px dashed #e63946;
+  background-color: #fff5f5;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.oss-coupon-badge {
+  display: inline-block;
+  background-color: #e63946;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.oss-coupon-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #111;
+  margin-bottom: 5px;
+}
+
+.oss-coupon-desc {
+  font-size: 0.85rem;
+  color: #444;
+  margin: 0;
+}
+/* ==========================================
+   スマホ表示（レスポンシブ）修正
+   ========================================== */
+@media (max-width: 600px) {
+  /* ボタンエリアを縦並びに変更 */
+  .oss-actions {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  .oss-actions .oss-button {
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  /* キャンバスがスマホ枠からはみ出るのを防止 */
+  canvas#oss-canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* カード枠の余白調整 */
+  .oss-result-card,
+  #oss-pdf {
+    width: 100% !important;
+    box-sizing: border-box;
+    padding: 15px !important;
+  }
+}

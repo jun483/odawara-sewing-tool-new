@@ -9,100 +9,69 @@ if (!defined('ABSPATH')) {
 class CalculatorEngine
 {
     /**
+     * 生地種類の表示名マッピング
+     */
+    private const FABRIC_TYPES = [
+        'oxford'   => 'オックス',
+        'sheeting' => 'シーチング・ブロード',
+        'quilt'    => 'キルティング',
+        'canvas'   => 'キャンバス・帆布',
+    ];
+
+    /**
      * 作品ごとの計算
      */
     public function calculate(array $data): array
     {
         $type = $data['type'] ?? '';
 
+        // リクエストデータから数値・値を取り出す
+        $fabricWidth = isset($data['fabric_width']) ? (int)$data['fabric_width'] : 110;
+        $rawFabricType = $data['fabric_type'] ?? '';
+        $fabricTypeName = self::FABRIC_TYPES[$rawFabricType] ?? $rawFabricType;
+
+        $result = [];
+
         switch ($type) {
 
             case 'lesson_bag':
                 $result = (new LessonBagCalculator())->calculate($data);
-                return ResultBuilder::build($result);
+                break;
 
             case 'shoe_bag':
                 $result = (new ShoeBagCalculator())->calculate($data);
-                return ResultBuilder::build($result);
+                break;
 
             case 'drawstring':
                 $result = (new DrawstringCalculator())->calculate($data);
-                return ResultBuilder::build($result);
+                break;
 
             case 'tote':
                 $result = (new ToteBagCalculator())->calculate($data);
-                return ResultBuilder::build($result);
+                break;
 
             case 'lunch_bag':
                 $result = (new LunchBagCalculator())->calculate($data);
-                return ResultBuilder::build($result);
+                break;
 
             case 'cup_bag':
                 $result = (new CupBagCalculator())->calculate($data);
-                return ResultBuilder::build($result);
+                break;
 
             case 'knapsack':
                 $result = (new KnapsackCalculator())->calculate($data);
-                return ResultBuilder::build($result);
+                break;
 
             case 'apron':
-
-                $result = [
-                'success'=>true,
-                'type'=>'apron',
-                'title'=>'エプロン',
-
-                'fabric_width'=>$fabricWidth,
-
-                'cut_width'=>75,
-                'cut_height'=>90,
-
-                'fabric'=>2.0,
-                'lining'=>0,
-
-                'handle'=>0,
-                'cord'=>0,
-
-            ];
-
+    $result = (new ApronCalculator())->calculate($data);
     break;
 
-            case 'child_apron':
-
-            $result = [
-            'success'=>true,
-            'type'=>'child_apron',
-            'title'=>'子供用エプロン',
-
-            'fabric_width'=>$fabricWidth,
-
-            'cut_width'=>65,
-            'cut_height'=>75,
-
-            'fabric'=>1.5,
-            'lining'=>0,
-
-            ];
-
+case 'child_apron':
+    $result = (new ChildApronCalculator())->calculate($data);
     break;
 
-        case 'bandana':
-
-            $result = [
-            'success'=>true,
-            'type'=>'bandana',
-            'title'=>'三角巾',
-
-            'fabric_width'=>$fabricWidth,
-
-            'cut_width'=>60,
-            'cut_height'=>60,
-
-            'fabric'=>0.6,
-            'lining'=>0,
-
-            ];
-
+case 'bandana':
+    $result = (new BandanaCalculator())->calculate($data);
     break;
 
             default:
@@ -111,5 +80,10 @@ class CalculatorEngine
                     'message' => '作品を選択してください。'
                 ];
         }
+
+        // 生地種類を結果データへセット
+        $result['fabric_type'] = $fabricTypeName;
+
+        return ResultBuilder::build($result);
     }
 }

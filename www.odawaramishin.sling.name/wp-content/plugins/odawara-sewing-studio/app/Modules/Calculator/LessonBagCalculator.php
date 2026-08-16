@@ -14,7 +14,7 @@ class LessonBagCalculator
         $height       = (float)($data['height'] ?? 0);
         $quantity     = max(1, (int)($data['quantity'] ?? 1));
         $fabricWidth  = (int)($data['fabric_width'] ?? 110);
-        $fabricType = $data['fabric_type'] ?? 'oxford';
+        $fabricType   = $data['fabric_type'] ?? 'oxford';
 
         if ($width <= 0 || $height <= 0) {
             return [
@@ -36,11 +36,12 @@ class LessonBagCalculator
         $fabricCalculator = new FabricCalculator();
 
         $fabric = $fabricCalculator->calculate(
-            $cutWidth,
-            $cutHeight,
-            $pieces,
-            $fabricWidth
-        );
+    $cutWidth,
+    $cutHeight,
+    $pieces,
+    $fabricWidth,
+    0.0
+);
 
         $layout = $fabricCalculator->layout(
             $cutWidth,
@@ -50,36 +51,26 @@ class LessonBagCalculator
         );
 
         return [
-
-            'success' => true,
-
-            'type'    => 'lesson_bag',
-
-            'title' => 'レッスンバッグ',
-
-            'fabric' => $fabric,
-
-            'lining' => $fabric,
-
+            'success'      => true,
+            'type'         => 'lesson_bag',
+            'title'        => 'レッスンバッグ',
+            'fabric'       => $fabric,
+            'lining'       => $fabric,
             'fabric_width' => $fabricWidth,
-
-            'cut_width' => round($cutWidth, 1),
-
-            'cut_height' => round($cutHeight, 1),
-
-            'quantity'     => $quantity,
-
-            'handle' => 35 * 2 * $quantity,
-
-            'interfacing' => round(
+            'cut_width'    => round($cutWidth, 1),
+            'cut_height'   => round($cutHeight, 1),
+            'quantity'     => $pieces, // 裁断枚数（2枚）をセット
+            'bag_quantity' => $quantity, // バッグの個数
+            'pieces'       => $pieces,
+            'handle'       => 35 * 2 * $quantity,
+            'interfacing'  => round(
                 ($cutWidth * $cutHeight * $pieces) / 10000,
                 2
             ),
-
-            'pieces' => $pieces,
-
-            'layout' => $layout
-
+            'columns'      => $layout['columns'] ?? 1,
+            'rows'         => $layout['rows'] ?? 1,
+            'rotate'       => $layout['rotate'] ?? false,
+            'layout'       => $layout
         ];
     }
 }

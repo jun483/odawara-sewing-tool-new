@@ -26,3 +26,56 @@ OSS\Core\Autoloader::register();
 add_action('plugins_loaded', function () {
     OSS\Core\Application::boot();
 });
+
+// フロントエンド用JavaScript読み込み設定
+add_action('wp_enqueue_scripts', function () {
+    // resources/js ディレクトリのURLを指定
+    $js_dir = OSS_PLUGIN_URL . 'resources/js';
+    $version = time();
+
+    // 1. 基盤レジストリ（最初に読み込み）
+    wp_enqueue_script(
+        'oss-machine-registry',
+        $js_dir . '/manufacturers/registry.js',
+        array(),
+        $version,
+        true
+    );
+
+    // 2. ジャノメ（契約済み：有効化）
+    wp_enqueue_script(
+        'oss-machine-janome',
+        $js_dir . '/manufacturers/janome.js',
+        array('oss-machine-registry'),
+        $version,
+        true
+    );
+
+    // 3. JUKI・ブラザー（未契約：一時停止中）
+    /*
+    wp_enqueue_script(
+        'oss-machine-juki',
+        $js_dir . '/manufacturers/juki.js',
+        array('oss-machine-registry'),
+        $version,
+        true
+    );
+    wp_enqueue_script(
+        'oss-machine-brother',
+        $js_dir . '/manufacturers/brother.js',
+        array('oss-machine-registry'),
+        $version,
+        true
+    );
+    */
+
+    // 4. メイン描画処理
+    wp_enqueue_script(
+        'oss-layout-renderer',
+        $js_dir . '/layout-renderer.js',
+        array('oss-machine-registry', 'oss-machine-janome'),
+        $version,
+        true
+    );
+
+});
